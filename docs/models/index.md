@@ -307,6 +307,37 @@ See the [OpenAI Multi-agent guide](https://developers.openai.com/api/docs/guides
 
 If you need a non-OpenAI provider, start with the SDK's built-in provider integration points. In many setups, this is enough without adding a third-party adapter. Examples for each pattern live in [examples/model_providers](https://github.com/openai/openai-agents-python/tree/main/examples/model_providers/).
 
+### Default to a non-OpenAI provider (no OpenAI API key required)
+
+By default, [`MultiProvider`][agents.MultiProvider] (the provider `Runner` uses when none is configured) routes bare model names such as `gpt-4.1` to OpenAI. You can change which provider handles bare (unprefixed) model names — and, when a non-OpenAI provider is selected, otherwise-unknown prefixes — so the SDK works out of the box without an `OPENAI_API_KEY`.
+
+Two provider-agnostic settings control this:
+
+- `AGENTS_DEFAULT_PROVIDER` (or `MultiProvider(default_provider=...)`) selects the provider for bare model names. Accepts `"openai"` (default), `"litellm"`, `"any-llm"`, or any prefix registered in a `provider_map`.
+- `AGENTS_DEFAULT_MODEL` sets the default model name for agents that do not set one. It takes precedence over `OPENAI_DEFAULT_MODEL` and, unlike it, is passed through verbatim so provider-specific, case-sensitive model ids are preserved.
+
+```bash
+# Default every agent to Anthropic Claude via LiteLLM, without any OpenAI credentials.
+export AGENTS_DEFAULT_PROVIDER=litellm
+export AGENTS_DEFAULT_MODEL=anthropic/claude-sonnet-4-20250514
+export ANTHROPIC_API_KEY=sk-ant-...
+```
+
+```python
+from agents import Agent, MultiProvider, RunConfig, Runner
+
+# Or configure it in code instead of via env vars:
+provider = MultiProvider(default_provider="litellm")
+agent = Agent(name="Assistant", instructions="You are helpful.")
+result = await Runner.run(
+    agent,
+    "Hello!",
+    run_config=RunConfig(model_provider=provider, model="anthropic/claude-sonnet-4-20250514"),
+)
+```
+
+Explicit prefixes (`openai/...`, `litellm/...`, `any-llm/...`, or entries in a `provider_map`) always take precedence over the default provider, so you can still mix providers in one run. When you default to a non-OpenAI provider, the OpenAI client is never constructed, so no OpenAI API key is needed. Consider disabling tracing (see below) since tracing uploads to OpenAI by default.
+
 ### Ways to integrate non-OpenAI providers
 
 | Approach | Use it when | Scope |

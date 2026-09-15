@@ -6,6 +6,8 @@ For suspected vulnerabilities, follow [SECURITY.md](SECURITY.md). Keep undisclos
 
 Read [AGENTS.md](AGENTS.md) for the repository's scope, compatibility, review, and verification requirements. Use Python 3.10 or newer, `uv`, and `make`. Install the development dependencies with `make sync`, and run Python commands through `uv run`.
 
+On Windows (or anywhere `make`/`bash` is unavailable), a PowerShell 7+ wrapper mirrors the common targets: `./make.ps1 sync`, `./make.ps1 check`, `./make.ps1 tests`, etc. Run `./make.ps1 help` for the list. The `Makefile` remains the source of truth and is what CI uses; the wrapper covers the local development loop only.
+
 Keep changes focused on the agreed outcome. Add regression coverage for changed behavior and follow [tests/README.md](tests/README.md) for test execution. Run focused checks while developing, then the applicable final checks described in [AGENTS.md](AGENTS.md#testing--automated-checks). Use the [pull request template](.github/PULL_REQUEST_TEMPLATE/pull_request_template.md) to explain the problem, change, and validation. Documentation changes follow the repository's verification tiers and release-timing rules.
 
 ## Security checklist

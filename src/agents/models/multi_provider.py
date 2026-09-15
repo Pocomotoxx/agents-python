@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import asyncio
+import os
 from typing import Any, Literal, cast
 
 from openai import AsyncOpenAI
@@ -13,6 +14,14 @@ from .openai_responses import OpenAIResponsesWebSocketOptions
 
 MultiProviderOpenAIPrefixMode = Literal["alias", "model_id"]
 MultiProviderUnknownPrefixMode = Literal["error", "model_id"]
+
+# Env var that selects which provider handles bare (unprefixed) model names and, when set to a
+# non-OpenAI provider, also handles otherwise-unknown prefixes. This lets the SDK default to any
+# provider without requiring an OpenAI API key. Recognized built-in values: "openai" (default),
+# "litellm", "any-llm". Any other value must correspond to a prefix registered in ``provider_map``.
+AGENTS_DEFAULT_PROVIDER_ENV_VARIABLE_NAME = "AGENTS_DEFAULT_PROVIDER"
+
+_BUILTIN_FALLBACK_PREFIXES = frozenset({"litellm", "any-llm"})
 
 
 class MultiProviderMap:
@@ -91,6 +100,7 @@ class MultiProvider(ModelProvider):
         openai_agent_registration: OpenAIAgentRegistrationConfig | dict[str, Any] | None = None,
         openai_responses_websocket_options: OpenAIResponsesWebSocketOptions | None = None,
         openai_buffer_streamed_tool_calls: bool = False,
+        default_provider: str | None = None,
     ) -> None:
         """Create a new OpenAI provider.
 
@@ -131,6 +141,11 @@ class MultiProvider(ModelProvider):
             openai_buffer_streamed_tool_calls: Whether OpenAI Chat Completions models should buffer
                 streamed function tool-call deltas and emit them to the SDK only after the provider
                 stream finishes.
+            default_provider: Which provider handles bare (unprefixed) model names and, when set to
+                a non-OpenAI provider, otherwise-unknown prefixes. Accepts ``"openai"`` (default),
+                ``"litellm"``, ``"any-llm"``, or any prefix registered in ``provider_map``. If not
+                provided, the ``AGENTS_DEFAULT_PROVIDER`` env var is used. This lets the SDK default
+                to any provider without requiring an OpenAI API key.
         """
         self.provider_map = provider_map
         self.openai_provider = OpenAIProvider(
@@ -151,6 +166,13 @@ class MultiProvider(ModelProvider):
         self._unknown_prefix_mode = self._validate_unknown_prefix_mode(unknown_prefix_mode)
 
         self._fallback_providers: dict[str, ModelProvider] = {}
+
+        # Which provider handles bare model names (and unknown prefixes). Defaults to OpenAI to
+        # preserve historical behavior; can be overridden per-instance or via env var so the SDK
+        # can default to any provider without an OpenAI API key.
+        if default_provider is None:
+            default_provider = os.getenv(AGENTS_DEFAULT_PROVIDER_ENV_VARIABLE_NAME)
+        self._default_prefix = self._validate_default_provider(default_provider)
 
     def _get_prefix_and_model_name(self, model_name: str | None) -> tuple[str | None, str | None]:
         if model_name is None:
@@ -187,6 +209,37 @@ class MultiProvider(ModelProvider):
             )
         return cast(MultiProviderUnknownPrefixMode, mode)
 
+    def _validate_default_provider(self, provider: str | None) -> str | None:
+        """Normalizes and validates the configured default provider prefix.
+
+        Returns ``None`` (meaning "OpenAI", the historical default) for empty/``"openai"`` values.
+        Built-in fallback prefixes and any prefix registered in ``provider_map`` are accepted.
+        """
+        if provider is None:
+            return None
+        provider = provider.strip().lower()
+        if provider in {"", "openai"}:
+            return None
+        if provider in _BUILTIN_FALLBACK_PREFIXES:
+            return provider
+        if self.provider_map is not None and self.provider_map.has_prefix(provider):
+            return provider
+        raise UserError(
+            f"Unknown default provider {provider!r}. Use 'openai', "
+            f"{sorted(_BUILTIN_FALLBACK_PREFIXES)}, or a prefix registered in provider_map."
+        )
+
+    def _get_default_provider(self) -> ModelProvider:
+        """Returns the ModelProvider that handles bare model names and unknown prefixes."""
+        if self._default_prefix is None:
+            return self.openai_provider
+        if (
+            self.provider_map is not None
+            and (provider := self.provider_map.get_provider(self._default_prefix)) is not None
+        ):
+            return provider
+        return self._get_fallback_provider(self._default_prefix)
+
     def _get_fallback_provider(self, prefix: str | None) -> ModelProvider:
         if prefix is None or prefix == "openai":
             return self.openai_provider
@@ -219,6 +272,11 @@ class MultiProvider(ModelProvider):
                 return self.openai_provider, stripped_model_name
             return self.openai_provider, original_model_name
 
+        # Unknown prefix. If a non-OpenAI default provider is configured, hand it the full,
+        # original model name (e.g. "anthropic/claude-..." routed to the LiteLLM provider).
+        if self._default_prefix is not None:
+            return self._get_default_provider(), original_model_name
+
         if self._unknown_prefix_mode == "model_id":
             return self.openai_provider, original_model_name
 
@@ -235,14 +293,15 @@ class MultiProvider(ModelProvider):
         Returns:
             A Model.
         """
-        # Bare model names are always delegated directly to the OpenAI provider. That provider can
-        # still point at an OpenAI-compatible endpoint via ``base_url``.
+        # Bare model names are delegated to the configured default provider (OpenAI unless
+        # overridden via ``default_provider`` / ``AGENTS_DEFAULT_PROVIDER``). The OpenAI provider
+        # can still point at an OpenAI-compatible endpoint via ``base_url``.
         if model_name is None:
-            return self.openai_provider.get_model(None)
+            return self._get_default_provider().get_model(None)
 
         prefix, stripped_model_name = self._get_prefix_and_model_name(model_name)
         if prefix is None:
-            return self.openai_provider.get_model(stripped_model_name)
+            return self._get_default_provider().get_model(stripped_model_name)
 
         provider, resolved_model_name = self._resolve_prefixed_model(
             original_model_name=model_name,
