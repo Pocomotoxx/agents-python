@@ -9,6 +9,11 @@ from agents.model_settings import ModelSettings
 
 OPENAI_DEFAULT_MODEL_ENV_VARIABLE_NAME = "OPENAI_DEFAULT_MODEL"
 
+# Provider-agnostic override for the default model. When set, it takes precedence over
+# ``OPENAI_DEFAULT_MODEL`` so the SDK can default to any provider's model (e.g. a LiteLLM or
+# any-llm model id) without requiring an OpenAI model or API key.
+AGENTS_DEFAULT_MODEL_ENV_VARIABLE_NAME = "AGENTS_DEFAULT_MODEL"
+
 GPT5DefaultReasoningEffort = Literal["none", "low", "medium"]
 
 # discourage directly accessing these constants
@@ -99,7 +104,19 @@ def is_gpt_5_default() -> bool:
 def get_default_model() -> str:
     """
     Returns the default model name.
+
+    Resolution order:
+    1. ``AGENTS_DEFAULT_MODEL`` (provider-agnostic; may be any provider's model id).
+    2. ``OPENAI_DEFAULT_MODEL`` (legacy, OpenAI-oriented).
+    3. The built-in OpenAI default.
+
+    The provider-agnostic override is intentionally returned verbatim (only stripped of
+    surrounding whitespace) so model ids that are case-sensitive for non-OpenAI providers are
+    preserved. The legacy/built-in OpenAI names are lower-cased for backward compatibility.
     """
+    agnostic = os.getenv(AGENTS_DEFAULT_MODEL_ENV_VARIABLE_NAME)
+    if agnostic is not None and agnostic.strip():
+        return agnostic.strip()
     return os.getenv(OPENAI_DEFAULT_MODEL_ENV_VARIABLE_NAME, "gpt-5.6-luna").lower()
 
 
