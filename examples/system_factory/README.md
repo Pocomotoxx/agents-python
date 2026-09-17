@@ -51,3 +51,10 @@ root = project.write_to("generated")  # writes files + PRESENTATION.md
 
 `build_system(task, model=...)` accepts an injected model, so the whole pipeline runs fully offline
 in tests (see `tests/test_system_factory.py`, which uses a `ScriptedModel`).
+
+## Visual designer (web app)
+
+[`webapp/`](webapp/) is a browser-based, drag-and-drop designer for a `SystemSpec` (React Flow +
+dagre, backed by a small FastAPI wrapper around this factory). Build a system as a graph, then
+generate a project and view its presentation. Inspired by AutoGen Studio's team builder, but
+provider-agnostic and wired to these generators. See [webapp/README.md](webapp/README.md).
