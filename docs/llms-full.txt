@@ -1,6 +1,6 @@
-# OpenAI Agents SDK Documentation (Full Context)
+# Agents SDK Documentation (Full Context)
 
-> Extended reference map for the OpenAI Agents SDK documentation site. Use these curated links when assembling prompts that need authoritative guidance on building, operating, and extending agentic applications with the SDK.
+> Extended reference map for the Agents SDK documentation site. Use these curated links when assembling prompts that need authoritative guidance on building, operating, and extending agentic applications with the SDK.
 
 The Agents SDK delivers a focused set of Python primitives—agents, tools, guardrails, handoffs, sessions, and tracing—plus voice and realtime interfaces. The pages below provide detailed walkthroughs, architectural patterns, and API-level documentation for integrating those capabilities into production systems.
 

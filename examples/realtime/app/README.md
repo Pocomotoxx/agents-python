@@ -57,4 +57,4 @@ To use the same UI with your own agents, edit `agent.py` and ensure get_starting
 -   **Event Handling**: Full event stream processing with transcript generation
 -   **Frontend**: Vanilla JavaScript with clean, responsive CSS
 
-The demo showcases the core patterns for building realtime voice applications with the OpenAI Agents SDK.
+The demo showcases the core patterns for building realtime voice applications with the Agents SDK.

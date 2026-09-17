@@ -2,9 +2,9 @@
 search:
   exclude: true
 ---
-# OpenAI Agents SDK
+# Agents SDK
 
-[OpenAI Agents SDK](https://github.com/openai/openai-agents-python)让您能够使用一个轻量、易用且仅包含极少抽象概念的软件包，构建智能体式 AI 应用。它是我们之前智能体实验项目[Swarm](https://github.com/openai/swarm/tree/main)的生产就绪升级版。Agents SDK 仅包含一小组基础组件：
+[Agents SDK](https://github.com/openai/openai-agents-python)让您能够使用一个轻量、易用且仅包含极少抽象概念的软件包，构建智能体式 AI 应用。它是我们之前智能体实验项目[Swarm](https://github.com/openai/swarm/tree/main)的生产就绪升级版。Agents SDK 仅包含一小组基础组件：
 
 -   **智能体**，即配备了指令和工具的 LLM
 -   **Agents as tools / 任务转移**，允许智能体将特定任务委派给其他智能体

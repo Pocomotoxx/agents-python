@@ -10,11 +10,11 @@ Realtime agents in the Python SDK are server-side, low-latency agents built on t
 
 -   Python 3.10 or higher
 -   OpenAI API key
--   Basic familiarity with the OpenAI Agents SDK
+-   Basic familiarity with the Agents SDK
 
 ## Installation
 
-If you haven't already, install the OpenAI Agents SDK:
+If you haven't already, install the Agents SDK:
 
 ```bash
 pip install openai-agents

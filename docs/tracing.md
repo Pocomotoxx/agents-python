@@ -205,7 +205,7 @@ await Runner.run(
 
 ## Ecosystem integrations
 
-The following community and vendor integrations support the tracing API surface of the OpenAI Agents SDK.
+The following community and vendor integrations support the tracing API surface of the Agents SDK.
 
 ### External tracing processors list
 

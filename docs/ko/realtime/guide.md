@@ -4,7 +4,7 @@ search:
 ---
 # 실시간 에이전트 가이드
 
-이 가이드에서는 OpenAI Agents SDK의 실시간 계층이 OpenAI Realtime API에 어떻게 매핑되는지와 파이썬 SDK가 그 위에 추가하는 동작을 설명합니다.
+이 가이드에서는 Agents SDK의 실시간 계층이 OpenAI Realtime API에 어떻게 매핑되는지와 파이썬 SDK가 그 위에 추가하는 동작을 설명합니다.
 
 !!! note "여기서 시작"
 
@@ -104,7 +104,7 @@ runner = RealtimeRunner(
                 "input": {
                     "transcription": {
                         "model": "gpt-live-transcribe",
-                        "prompt": "A support call about the OpenAI Agents SDK.",
+                        "prompt": "A support call about the Agents SDK.",
                         "keywords": ["RunState", "MCPServerManager"],
                         "languages": ["en", "ja"],
                     },

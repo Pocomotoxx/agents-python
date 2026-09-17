@@ -4,7 +4,7 @@ search:
 ---
 # リアルタイムエージェントガイド
 
-このガイドでは、OpenAI Agents SDK のリアルタイムレイヤーが OpenAI Realtime API にどのように対応しているか、および Python SDK が追加する動作について説明します。
+このガイドでは、Agents SDK のリアルタイムレイヤーが OpenAI Realtime API にどのように対応しているか、および Python SDK が追加する動作について説明します。
 
 !!! note "はじめに"
 
@@ -104,7 +104,7 @@ runner = RealtimeRunner(
                 "input": {
                     "transcription": {
                         "model": "gpt-live-transcribe",
-                        "prompt": "A support call about the OpenAI Agents SDK.",
+                        "prompt": "A support call about the Agents SDK.",
                         "keywords": ["RunState", "MCPServerManager"],
                         "languages": ["en", "ja"],
                     },

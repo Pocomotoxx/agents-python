@@ -209,7 +209,7 @@ await Runner.run(
 
 ## 生态系统集成 {#ecosystem-integrations}
 
-以下社区和供应商集成支持OpenAI Agents SDK的追踪 API 接口。
+以下社区和供应商集成支持Agents SDK的追踪 API 接口。
 
 ### 外部追踪处理器列表 {#external-tracing-processors-list}
 

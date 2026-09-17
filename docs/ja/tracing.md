@@ -209,7 +209,7 @@ await Runner.run(
 
 ## エコシステム統合 {#ecosystem-integrations}
 
-次のコミュニティおよびベンダー統合は、OpenAI Agents SDK のトレーシング API サーフェスに対応しています。
+次のコミュニティおよびベンダー統合は、Agents SDK のトレーシング API サーフェスに対応しています。
 
 ### 外部トレーシングプロセッサー一覧 {#external-tracing-processors-list}
 

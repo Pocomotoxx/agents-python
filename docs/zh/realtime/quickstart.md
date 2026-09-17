@@ -14,11 +14,11 @@ Python SDK 中的实时智能体是在服务端运行的低延迟智能体，基
 
 -   Python 3.10 或更高版本
 -   OpenAI API 密钥
--   基本熟悉 OpenAI Agents SDK
+-   基本熟悉 Agents SDK
 
 ## 安装 {#installation}
 
-如果尚未安装，请安装 OpenAI Agents SDK：
+如果尚未安装，请安装 Agents SDK：
 
 ```bash
 pip install openai-agents

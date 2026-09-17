@@ -1,6 +1,6 @@
-# OpenAI Agents SDK [![PyPI](https://img.shields.io/pypi/v/openai-agents?label=pypi%20package)](https://pypi.org/project/openai-agents/)
+# Agents SDK [![PyPI](https://img.shields.io/pypi/v/openai-agents?label=pypi%20package)](https://pypi.org/project/openai-agents/)
 
-The OpenAI Agents SDK is a lightweight yet powerful framework for building multi-agent workflows. It is provider-agnostic, supporting the OpenAI Responses and Chat Completions APIs, as well as 100+ other LLMs.
+The Agents SDK is a lightweight yet powerful framework for building multi-agent workflows. It is provider-agnostic, supporting the OpenAI Responses and Chat Completions APIs, as well as 100+ other LLMs.
 
 <img src="https://cdn.openai.com/API/docs/images/orchestration.png" alt="Image of the Agents Tracing UI" style="max-height: 803px;">
 
@@ -24,7 +24,7 @@ Explore the [examples](https://github.com/openai/openai-agents-python/tree/main/
 
 ## Get started
 
-To get started, set up your Python environment (Python 3.10 or newer required), and then install OpenAI Agents SDK package.
+To get started, set up your Python environment (Python 3.10 or newer required), and then install Agents SDK package.
 
 ### venv
 

@@ -1,6 +1,6 @@
 # Realtime agents guide
 
-This guide explains how the OpenAI Agents SDK's realtime layer maps onto the OpenAI Realtime API, and what extra behavior the Python SDK adds on top.
+This guide explains how the Agents SDK's realtime layer maps onto the OpenAI Realtime API, and what extra behavior the Python SDK adds on top.
 
 !!! note "Start here"
 
@@ -100,7 +100,7 @@ runner = RealtimeRunner(
                 "input": {
                     "transcription": {
                         "model": "gpt-live-transcribe",
-                        "prompt": "A support call about the OpenAI Agents SDK.",
+                        "prompt": "A support call about the Agents SDK.",
                         "keywords": ["RunState", "MCPServerManager"],
                         "languages": ["en", "ja"],
                     },

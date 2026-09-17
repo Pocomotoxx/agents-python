@@ -15,7 +15,7 @@ SDK는 파일 스테이징, 파일 시스템 도구, 셸 액세스, 샌드박스
 ## 사전 요구 사항 {#prerequisites}
 
 - Python 3.10 이상
-- OpenAI Agents SDK에 대한 기본 지식
+- Agents SDK에 대한 기본 지식
 - 샌드박스 클라이언트. 로컬 개발에서는 `UnixLocalSandboxClient`로 시작
 
 ## 설치 {#installation}

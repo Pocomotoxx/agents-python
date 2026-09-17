@@ -1,4 +1,4 @@
-site_name: OpenAI Agents SDK
+site_name: Agents SDK
 theme:
   name: material
   features:
