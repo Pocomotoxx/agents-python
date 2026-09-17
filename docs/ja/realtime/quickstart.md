@@ -14,11 +14,11 @@ Python SDK のリアルタイムエージェントは、WebSocket トランス�
 
 -   Python 3.10 以降
 -   OpenAI API キー
--   OpenAI Agents SDKの基本的な知識
+-   Agents SDKの基本的な知識
 
 ## インストール {#installation}
 
-まだインストールしていない場合は、OpenAI Agents SDKをインストールします。
+まだインストールしていない場合は、Agents SDKをインストールします。
 
 ```bash
 pip install openai-agents

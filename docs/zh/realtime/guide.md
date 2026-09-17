@@ -4,7 +4,7 @@ search:
 ---
 # 实时智能体指南
 
-本指南介绍OpenAI Agents SDK的实时层如何映射到OpenAI Realtime API，以及 Python SDK 在此基础上添加了哪些额外行为。
+本指南介绍Agents SDK的实时层如何映射到OpenAI Realtime API，以及 Python SDK 在此基础上添加了哪些额外行为。
 
 !!! note "从这里开始"
 
@@ -104,7 +104,7 @@ runner = RealtimeRunner(
                 "input": {
                     "transcription": {
                         "model": "gpt-live-transcribe",
-                        "prompt": "A support call about the OpenAI Agents SDK.",
+                        "prompt": "A support call about the Agents SDK.",
                         "keywords": ["RunState", "MCPServerManager"],
                         "languages": ["en", "ja"],
                     },

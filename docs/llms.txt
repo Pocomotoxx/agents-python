@@ -1,6 +1,6 @@
-# OpenAI Agents SDK Documentation
+# Agents SDK Documentation
 
-> Official documentation for building production-ready agentic applications with the OpenAI Agents SDK, a Python toolkit that equips LLM-powered assistants with tools, guardrails, handoffs, sessions, tracing, voice, and realtime capabilities.
+> Official documentation for building production-ready agentic applications with the Agents SDK, a Python toolkit that equips LLM-powered assistants with tools, guardrails, handoffs, sessions, tracing, voice, and realtime capabilities.
 
 The SDK focuses on a concise set of primitives so you can orchestrate multi-agent workflows without heavy abstractions. These pages explain how to install the library, design agents, coordinate tools, handle results, and extend the platform to new modalities.
 

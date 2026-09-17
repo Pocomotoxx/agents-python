@@ -209,7 +209,7 @@ await Runner.run(
 
 ## 에코시스템 통합 {#ecosystem-integrations}
 
-다음 커뮤니티 및 공급업체 통합은 OpenAI Agents SDK의 트레이싱 API 인터페이스를 지원합니다.
+다음 커뮤니티 및 공급업체 통합은 Agents SDK의 트레이싱 API 인터페이스를 지원합니다.
 
 ### 외부 트레이싱 프로세서 목록 {#external-tracing-processors-list}
 

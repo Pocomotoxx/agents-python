@@ -15,7 +15,7 @@ SDK 提供了这套执行框架，无需你自行整合文件暂存、文件系�
 ## 前置条件 {#prerequisites}
 
 - Python 3.10 或更高版本
-- 基本熟悉 OpenAI Agents SDK
+- 基本熟悉 Agents SDK
 - 一个沙箱客户端。进行本地开发时，可从 `UnixLocalSandboxClient` 开始。
 
 ## 安装 {#installation}

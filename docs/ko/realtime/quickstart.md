@@ -14,11 +14,11 @@ Python SDK의 실시간 에이전트는 WebSocket 전송을 통해 OpenAI Realti
 
 -   Python 3.10 이상
 -   OpenAI API 키
--   OpenAI Agents SDK에 대한 기본 지식
+-   Agents SDK에 대한 기본 지식
 
 ## 설치 {#installation}
 
-아직 설치하지 않았다면 OpenAI Agents SDK를 설치합니다.
+아직 설치하지 않았다면 Agents SDK를 설치합니다.
 
 ```bash
 pip install openai-agents

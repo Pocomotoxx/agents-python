@@ -15,7 +15,7 @@ SDK は、ファイルのステージング、ファイルシステムツール�
 ## 前提条件 {#prerequisites}
 
 - Python 3.10 以降
-- OpenAI Agents SDK に関する基本的な知識
+- Agents SDK に関する基本的な知識
 - サンドボックスクライアント。ローカル開発では、まず `UnixLocalSandboxClient` を使用します。
 
 ## インストール {#installation}

@@ -11,7 +11,7 @@ The SDK gives you that execution harness without making you wire together file s
 ## Prerequisites
 
 - Python 3.10 or higher
-- Basic familiarity with the OpenAI Agents SDK
+- Basic familiarity with the Agents SDK
 - A sandbox client. For local development, start with `UnixLocalSandboxClient`.
 
 ## Installation

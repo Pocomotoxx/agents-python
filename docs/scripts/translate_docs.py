@@ -200,7 +200,7 @@ def built_instructions(target_language: str, lang_code: str) -> str:
     return f"""You are an expert technical translator.
 
 Your task: translate the markdown passed as a user input from English into {target_language}.
-The inputs are the official OpenAI Agents SDK framework documentation, and your translation outputs'll be used for serving the official {target_language} version of them. Thus, accuracy, clarity, and fidelity to the original are critical.
+The inputs are the official Agents SDK framework documentation, and your translation outputs'll be used for serving the official {target_language} version of them. Thus, accuracy, clarity, and fidelity to the original are critical.
 
 ############################
 ##  OUTPUT REQUIREMENTS  ##

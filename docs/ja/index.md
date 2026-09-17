@@ -2,9 +2,9 @@
 search:
   exclude: true
 ---
-# OpenAI Agents SDK
+# Agents SDK
 
-[OpenAI Agents SDK](https://github.com/openai/openai-agents-python) を使用すると、抽象化を最小限に抑えた軽量で使いやすいパッケージで、エージェント型 AI アプリを構築できます。これは、以前のエージェント向け実験プロジェクトである [Swarm](https://github.com/openai/swarm/tree/main) を本番環境向けにアップグレードしたものです。Agents SDK は、非常に少数の基本コンポーネントで構成されています。
+[Agents SDK](https://github.com/openai/openai-agents-python) を使用すると、抽象化を最小限に抑えた軽量で使いやすいパッケージで、エージェント型 AI アプリを構築できます。これは、以前のエージェント向け実験プロジェクトである [Swarm](https://github.com/openai/swarm/tree/main) を本番環境向けにアップグレードしたものです。Agents SDK は、非常に少数の基本コンポーネントで構成されています。
 
 -   **エージェント**: 指示とツールを備えた LLM
 -   **Agents as tools / ハンドオフ**: エージェントが特定のタスクを別のエージェントに委任できる仕組み
